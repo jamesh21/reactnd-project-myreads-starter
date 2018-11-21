@@ -19,11 +19,18 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
-        {this.state.showSearchPage ?
-            <BookSearch/> :
-            <BookShelves/>
-        }
-      </div>
+          <Route exact path="/" render={() => (
+              <BookShelves />
+          )}/>
+          <Route path="/search" render={() => (
+              <BookSearch />
+          )}/>
+     </div>
+        // {this.state.showSearchPage ?
+        //     <BookSearch/> :
+        //     <BookShelves/>
+        // }
+
   )}
 }
 
