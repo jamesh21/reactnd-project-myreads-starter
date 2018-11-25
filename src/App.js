@@ -33,24 +33,37 @@ class BooksApp extends React.Component {
   }
 
   changeSelection = (newSelection, book ) => {
-      // console.log(newSelection)
-      const currentSelection = book.shelf
+      if (book.shelf !== newSelection) {
+          const currentSelection = book.shelf
+          book.shelf = newSelection
+          if (newSelection === 'none') {
+              this.removeFromShelf(book, currentSelection)
+          } else {
+              this.moveToDiffShelf(book, currentSelection, newSelection)
 
-      book.shelf = newSelection
-       BooksAPI.update(book, newSelection).then(() => {
-           this.setState(state => ({
-               [currentSelection]: state[currentSelection].filter(currentSelectShelf => currentSelectShelf.title !== book.title),
-               [newSelection]: state[newSelection].concat( [book] )
-           }))
-       })
-
+          }
+      }
+  }
+  moveToDiffShelf = (book, currentSelection, newSelection) => {
+      BooksAPI.update(book, newSelection).then(() => {
+          this.setState(state => ({
+              [currentSelection]: state[currentSelection].filter(currentSelectShelf => currentSelectShelf.title !== book.title),
+              [newSelection]: state[newSelection].concat( [book] )
+          }))
+      })
+  }
+  removeFromShelf = (book, currentSelection) => {
+      BooksAPI.update(book, 'none').then(() => {
+          this.setState(state => ({
+              [currentSelection]: state[currentSelection].filter(currentSelectShelf => currentSelectShelf.title !== book.title)
+          }))
+      })
 
   }
-
   componentDidMount() {
       BooksAPI.getAll().then((books) => {
           this.placeBooks(books)
-          this.setState( {books} );
+          this.setState( {books} )
 
       })
   }
