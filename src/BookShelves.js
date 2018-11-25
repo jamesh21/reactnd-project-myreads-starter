@@ -2,29 +2,47 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Book from './Book'
 class BookShelves extends Component {
+
     state = {
-        wantToShelf: [],
-        readShelf: [],
-        currentShelf: []
+        // wantToRead: [],
+        // read: [],
+        // currentlyReading: []
     }
-    placeBooks = (books) => {
-        books.forEach((book) => {
-            if (book.shelf === 'currentlyReading') {
-                this.state.currentShelf.push(book)
-            } else if (book.shelf === 'wantToRead') {
-                this.state.wantToShelf.push(book)
-            } else {
-                this.state.readShelf.push(book)
-            }
-        })
-    }
+
+    // placeBooks = (books) => {
+    //     books.forEach((book) => {
+    //         if (book.shelf === 'currentlyReading') {
+    //             this.state.currentlyReading.push(book)
+    //         } else if (book.shelf === 'wantToRead') {
+    //             this.state.wantToRead.push(book)
+    //         } else {
+    //             this.state.read.push(book)
+    //         }
+    //     })
+    // }
+
+    // changeSelection = (newSelection, book ) => {
+    //     // console.log(newSelection)
+    //     const currentSelection = book.shelf
+    //
+    //     book.shelf = newSelection
+    //      BooksAPI.update(book, newSelection).then(() => {
+    //          this.setState(state => ({
+    //              [currentSelection]: state[currentSelection].filter(currentSelectShelf => currentSelectShelf.title !== book.title),
+    //              [newSelection]: state[newSelection].concat( [book] )
+    //          }))
+    //      })
+    //
+    //
+    // }
+
     render() {
-        const { books } = this.props
-        console.log(books)
-        this.placeBooks(books)
-        console.log(this.state.wantToShelf)
-        console.log(this.state.readShelf)
-        console.log(this.state.currentShelf)
+        const { wantToRead, read, currentlyReading, changeSelection } = this.props
+        // console.log(books)
+        // this.placeBooks(books)
+        // console.log(this.state.wantToRead)
+        // console.log(this.state.read)
+        // console.log(this.state.currentlyReading)
         return (
             <div className="list-books">
               <div className="list-books-title">
@@ -36,8 +54,13 @@ class BookShelves extends Component {
                     <h2 className="bookshelf-title">Currently Reading</h2>
                     <div className="bookshelf-books">
                       <ol className="books-grid">
-                        {this.state.currentShelf.map((book, index) => (
-                            <li key={index}><Book book={book}/></li>
+                        {currentlyReading.map((book, index) => (
+                            <li key={index}>
+                                <Book
+                                    book={book}
+                                    changeSelection={changeSelection}
+                                />
+                            </li>
                         ))}
                       </ol>
                     </div>
@@ -46,8 +69,13 @@ class BookShelves extends Component {
                     <h2 className="bookshelf-title">Want to Read</h2>
                     <div className="bookshelf-books">
                       <ol className="books-grid">
-                          {this.state.wantToShelf.map((book, index) => (
-                              <li key={index}><Book book={book}/></li>
+                          {wantToRead.map((book, index) => (
+                              <li key={index}>
+                                <Book
+                                    book={book}
+                                    changeSelection={changeSelection}
+                                />
+                              </li>
                           ))}
                       </ol>
                     </div>
@@ -56,8 +84,13 @@ class BookShelves extends Component {
                     <h2 className="bookshelf-title">Read</h2>
                     <div className="bookshelf-books">
                       <ol className="books-grid">
-                          {this.state.readShelf.map((book, index) => (
-                              <li key={index}><Book book={book}/></li>
+                          {read.map((book, index) => (
+                              <li key={index}>
+                                <Book
+                                    book={book}
+                                    changeSelection={changeSelection}
+                                />
+                             </li>
                           ))}
                       </ol>
                     </div>

@@ -1,18 +1,15 @@
 import React, { Component } from 'react'
 
 class Book extends Component {
-    changeSelection = () => {
-        console.log("changed");
-    }
+
     render () {
-        const { book } = this.props;
-        // console.log(book);
+        const { book, changeSelection } = this.props;
         return book != null && (
             <div className="book">
               <div className="book-top">
                 <div className="book-cover" style={{ width: 128, height: 188, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
                 <div className="book-shelf-changer">
-                  <select onChange={this.changeSelection}>
+                  <select onChange={(event) => changeSelection(event.target.value, book)}>
                     <option value="move" disabled>Move to...</option>
                     <option value="currentlyReading">Currently Reading</option>
                     <option value="wantToRead">Want to Read</option>
