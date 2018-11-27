@@ -4,9 +4,9 @@ import Book from './Book'
 class BookShelves extends Component {
 
     state = {
-        // wantToRead: [],
-        // read: [],
-        // currentlyReading: []
+        wantToRead: [],
+        read: [],
+        currentlyReading: []
     }
 
     // placeBooks = (books) => {
@@ -37,8 +37,8 @@ class BookShelves extends Component {
     // }
 
     render() {
-        const { wantToRead, read, currentlyReading, changeSelection } = this.props
-        // console.log(books)
+        const { books, changeSelection } = this.props
+        console.log(books)
         // this.placeBooks(books)
         // console.log(this.state.wantToRead)
         // console.log(this.state.read)
@@ -54,12 +54,12 @@ class BookShelves extends Component {
                     <h2 className="bookshelf-title">Currently Reading</h2>
                     <div className="bookshelf-books">
                       <ol className="books-grid">
-                        {currentlyReading.map((book, index) => (
+                        {books.filter((book) => (book.shelf === 'currentlyReading')).map((filteredBook, index) => (
                             <li key={index}>
-                                <Book
-                                    book={book}
-                                    changeSelection={changeSelection}
-                                />
+                              <Book
+                                  book={filteredBook}
+                                  changeSelection={changeSelection}
+                              />
                             </li>
                         ))}
                       </ol>
@@ -69,10 +69,10 @@ class BookShelves extends Component {
                     <h2 className="bookshelf-title">Want to Read</h2>
                     <div className="bookshelf-books">
                       <ol className="books-grid">
-                          {wantToRead.map((book, index) => (
+                          {books.filter((book) => (book.shelf === 'wantToRead')).map((filteredBook, index) => (
                               <li key={index}>
                                 <Book
-                                    book={book}
+                                    book={filteredBook}
                                     changeSelection={changeSelection}
                                 />
                               </li>
@@ -84,13 +84,13 @@ class BookShelves extends Component {
                     <h2 className="bookshelf-title">Read</h2>
                     <div className="bookshelf-books">
                       <ol className="books-grid">
-                          {read.map((book, index) => (
+                          {books.filter((book) => (book.shelf === 'read')).map((filteredBook, index) => (
                               <li key={index}>
                                 <Book
-                                    book={book}
+                                    book={filteredBook}
                                     changeSelection={changeSelection}
                                 />
-                             </li>
+                              </li>
                           ))}
                       </ol>
                     </div>
