@@ -4,7 +4,7 @@ This Project uses React to create a Bookshelf app where users are able to catego
 books into different shelves. Users are also able to search for new books to add
 to their shelves.
 
-!(/img/myReadsPic.png)
+![Image of booshelf](/img/myReadsPic.png)
 
 ## Quickstart
 
