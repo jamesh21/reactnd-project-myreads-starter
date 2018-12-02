@@ -3,46 +3,8 @@ import { Link } from 'react-router-dom'
 import Book from './Book'
 class BookShelves extends Component {
 
-    state = {
-        wantToRead: [],
-        read: [],
-        currentlyReading: []
-    }
-
-    // placeBooks = (books) => {
-    //     books.forEach((book) => {
-    //         if (book.shelf === 'currentlyReading') {
-    //             this.state.currentlyReading.push(book)
-    //         } else if (book.shelf === 'wantToRead') {
-    //             this.state.wantToRead.push(book)
-    //         } else {
-    //             this.state.read.push(book)
-    //         }
-    //     })
-    // }
-
-    // changeSelection = (newSelection, book ) => {
-    //     // console.log(newSelection)
-    //     const currentSelection = book.shelf
-    //
-    //     book.shelf = newSelection
-    //      BooksAPI.update(book, newSelection).then(() => {
-    //          this.setState(state => ({
-    //              [currentSelection]: state[currentSelection].filter(currentSelectShelf => currentSelectShelf.title !== book.title),
-    //              [newSelection]: state[newSelection].concat( [book] )
-    //          }))
-    //      })
-    //
-    //
-    // }
-
     render() {
         const { books, changeSelection } = this.props
-        console.log(books)
-        // this.placeBooks(books)
-        // console.log(this.state.wantToRead)
-        // console.log(this.state.read)
-        // console.log(this.state.currentlyReading)
         return (
             <div className="list-books">
               <div className="list-books-title">
@@ -97,7 +59,6 @@ class BookShelves extends Component {
                   </div>
                 </div>
               </div>
-
               <div className="open-search">
                 <Link to="/search">Add a book</Link>
               </div>
